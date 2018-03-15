@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js</title>
+	
+	<link rel="stylesheet" type="text/css" href="static/exel.css">
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<div id="grid">
+	<table>
+		<thead>
+		    <th>&nbsp;</th>
+			<th v-for="(col,index) in options.cols">{{index | columnName}}</th>
+		</thead>
+		<tbody>
+			<tr v-for="(row,index) in options.rows">
+				<td>{{index+1}}</td>
+				<td v-for="(col,index2) in options.cols">
+					<span 
+					:style="borderCol(grid[index][index2])"
+					@click="editCell(grid[index][index2],$event)"
+					v-show="grid[index][index2]!=currentCell">
+					{{grid[index][index2].value }}
+					
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input 
+	    v-show="currentCell"
+		type="text" 
+		@keyup.enter="saveCell"
+		ref="inputCell"
+		v-model="currentCell.raw"
+		@input='highlight(currentCell.raw)'
+		 />
+	
+		
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script type="text/javascript" src="static/exelformula.js"></script>
+<script type="text/javascript" src="static/exel.js"></script>
+</body>
+</html>

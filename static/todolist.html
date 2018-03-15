@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>vue.js</title>
+	
+	<link rel="stylesheet" type="text/css" href="static/todolist.css">
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<div id="todo">
+	<h1 class="title">Мій список справ</h1>
+	<ul class="tasks">
+		<li class="task" v-for="(task,index) in tasks" @dblclick="showInput(task,index)">
+		<span v-if="task.show">
+		<span class="taskDone"  :class="{blueTask : task.done}" @click="task.done = !task.done">&#10004;</span>
+		<span :class="{line : task.done}">{{task.title}}</span>
+		</span>
+		<input type="text" class="editinput" v-else="task.show"  v-model='edit' @keyup.enter='editTask(index)' name="">
+		<span class="delete_task" @click="deleteTask(index)">&#10008;</span>
+		</li>
+	</ul>
+	<form  @submit='addTask'>
+		<input type="text" class="newTask" v-model="newTask" >
+	</form>
+	
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script type="text/javascript" src="static/todolist.js"></script>
+</body>
+</html>

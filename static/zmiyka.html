@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>canvas</title>
+<style type="text/css">
+*{
+	padding:0;
+	margin:0;
+}
+body,html{
+	width:100%;
+	height:100%;
+	display:flex;
+	
+
+}
+
+	#can{
+		
+		width:600px;
+		height:420px;
+		background:silver;
+		border:1px solid black;
+		margin:auto ;
+		box-sizing:border-box;
+	}
+	
+
+
+	
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<canvas id="can"  width="600" height="420"></canvas>
+
+
+
+
+<script type="text/javascript">
+function rand(min,max){
+	var k = Math.floor(Math.random()* (max - min) + min);
+	return (Math.round(k/s ) * s);}
+function newA(){
+	a=[rand(0,600),rand(0,420)];
+}
+function newB(){
+	sBody=[{x:0,y:0}];
+}
+var canvas = document.getElementById('can');
+var ctx = canvas.getContext('2d');
+var a , sBody , d=1 , s=30;
+newA();
+newB();
+
+function draw(){
+	var x = 30;
+	var y = 30;
+	for(var i =0;i<600;i+=30){ 
+		ctx.beginPath();
+	    ctx.moveTo(x,0);
+	    ctx.lineTo(x,420);
+	    ctx.stroke();
+	    x+=30;
+
+	}
+	for(var i =0;i<420;i+=30){ 
+		ctx.beginPath();
+	    ctx.moveTo(0,y);
+	    ctx.lineTo(600,y);
+	    ctx.stroke();
+	    y+=30;
+
+	}
+	
+}
+setInterval(function(){
+ctx.clearRect(0,0,600,420);
+draw();
+ctx.beginPath();
+ctx.fillStyle="red";
+ctx.fillRect(a[0],a[1],30,30);
+ctx.fillStyle="#000";
+if(a[0] + s > 600  || a[1] + s > 420) newA();
+sBody.forEach(function(e,i){
+var last = sBody.length -1;
+if(e.x== sBody[last].x && e.y == sBody[last].y && i<last){
+	sBody.splice(0,last);
+	newB();
+	d=1;
+}});
+var m = sBody[0],f={x:m.x,y:m.y},l=sBody[sBody.length-1];
+if(d==1){
+	f.x=l.x+s;
+	f.y=l.y;
+}
+if(d==2){
+	f.y=l.y+s;
+	f.x=l.x;
+}
+if(d==3){
+	f.x=l.x - s;
+	f.y=l.y;
+}
+if(d==4){
+	f.y=l.y - s;
+	f.x=l.x;
+}
+sBody.push(f);
+sBody.splice(0,1);
+sBody.forEach(function(pob,i){
+if(d==1){
+	if(pob.x>600){
+		pob.x=0;
+	}
+}
+if(d==2){
+	if(pob.y>420){
+		pob.y=0;
+	}
+}
+if(d==3){
+	if(pob.x < 0){
+		pob.x=600;
+	}
+}
+if(d==4){
+	if(pob.y < 0){
+		pob.y=420;
+	}
+}
+if(pob.x==a[0]&&pob.y==a[1]) {
+	newA();
+	sBody.unshift({x:0,y:0});
+}
+ctx.fillRect(pob.x,pob.y,30,30);
+});},150);
+onkeydown = function(e){
+	var k = e.keyCode;
+	if([38,39,40,37].indexOf(k) >= 0){
+	e.preventDefault();
+}
+if(k==39 && d != 3) d=1;
+if(k==40 && d != 4) d=2;
+if(k==37 && d != 1) d=3;
+if( k==38 && d != 2) d=4;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

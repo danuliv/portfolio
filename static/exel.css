@@ -1,0 +1,57 @@
+*{
+	padding:0;
+	margin:0;
+}
+body{
+	
+	font-size:Arial,sans-serif;
+	height:100vh;
+	display:flex;
+}
+#grid{
+	margin:auto;
+}
+#grid table{
+	border-collapse: collapse;
+}
+#grid table thead{
+	background:#efefef;
+}
+#grid table thead th{
+	height:25px;
+	border:1px solid black;
+	width:100px;
+}
+#grid table thead th:first-child{
+	width:20px;
+}
+#grid table tbody{
+	background:#efefef;
+}
+#grid table tbody td{
+	box-sizing: border-box;
+	text-align: center;
+	height:25px;
+	border:1px solid black;
+	width:100px;
+}
+#grid table tbody td:first-child{
+	text-align: center;
+	vertical-align: middle;
+	width:20px;
+}
+#grid table tbody td span{
+	box-sizing: border-box;
+	border:2px dashed transparent;
+	width:100%;
+	height:100%;
+	display:block;
+
+}
+input{
+	width:100%;
+	height:100%;
+	border: 0;
+}
+
+

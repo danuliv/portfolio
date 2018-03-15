@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>portfolio</title>
+	<link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<style type="text/css">
+		ul{
+			list-style: none;
+		}
+		*{
+			padding:0;
+			margin:0;
+		}
+		html{
+			height:100vh;
+		}
+		
+		body{
+			
+			width:100%;
+			background:#cbd1d1;
+			display:flex;
+			font-family:Arial;
+			flex-direction:column;
+			align-items: center;
+			position:relative;
+			padding-bottom:50px;
+
+		}
+		html::-webkit-scrollbar {width:0px;}
+		.scroll::scrollbar { width: 0; }
+		i{
+			color:silver;
+			font-size:25px;
+			transition:all .4s ease-in-out ;
+		}
+		.container_item_body{
+			background:#eaece9;
+		}
+		
+		.container_item_title{
+			background:#dfe0da;
+			cursor:pointer;
+		}
+		.container{
+			display:flex;
+			flex-direction:column;
+			width:400px;
+			margin-top:40px;
+			
+		}
+		.container_item_title{
+			display:flex;
+			justify-content: space-between;
+			padding:14px 20px;
+			align-items: center;
+			border-radius:3px;
+		}
+		h2{
+			font-weight:500;
+			font-size:25px;
+
+		}
+		.container_item_body{
+			display:none;
+		}
+		.container_item_body li{
+			padding:14px 20px;
+			cursor:pointer;
+		}
+		.transform{
+			transform:rotate(45deg);
+			transition:all .4s ease-in-out ;
+		}
+		h1.title{
+			font-size:30px;
+			font-weight:500;
+			font-family: Arial;
+			margin:40px 0;
+			padding:0;
+
+		}
+		.text{
+
+			position:fixed;
+			top:10px;
+			right:10px;
+			font-size:15px;
+			font-family: Arial;
+			
+			
+			padding:5px 10px;
+			display:flex;
+			justify-content: space-between;
+			box-sizing: border-box;
+		
+			align-items: center;
+			color:black;
+			border-radius:5px;
+			cursor:pointer;
+		}
+		.contacts{
+			width:100%;
+			height:100%;
+			position:fixed;
+			top:0;
+			left:0;
+			background:rgba(0,0,0,.7);
+			box-sizing:border-box;
+			display:none;
+			overflow: hidden;
+			justify-content: flex-end;
+		}
+		.sidebar{
+			background:#ececec;
+			height:100%;
+			width:300px;
+			position:relative;
+			color:black;
+			font-family:Arial;
+			font-size:16px;
+			padding:30px 20px;
+			box-sizing:border-box;
+			transition:all .3s ease-in-out;
+			left:0;
+
+
+		}
+		.ion-android-close{
+			position:absolute;
+			top:20px;
+			right:20px;
+			font-size:30px;
+			color:black;
+			cursor:pointer;
+		}
+		.sidebar li{
+			padding:5px 0;
+		}
+		a{
+			text-decoration:none;
+			color:black;
+		}
+		.ion-android-contacts{
+			color:black;
+			margin-left:10px;
+		}
+		
+	</style>
+	
+</head>
+<body>
+
+<h1 class="title">
+	Примеры моих работ
+</h1>
+<div class="container">
+	<div class="container_item">
+		<h2 class="container_item_title">Ігры HTML5&Canvas <i class="ion-plus"></i></h2>
+		<ul class="container_item_body">
+			<li><a href="/2048">2048</a></li>
+			<li><a href="/krestiki">krestiki&nyliki</a></li>
+			<li><a href="/pjatnashki">pjatnashki</a></li>
+			<li><a href="/tetris">tetris</a></li>
+			<li><a href="/zmiyka">zmiyka</a></li>
+			<li><a href="/tanks">tanks</a></li>
+			<li><a href="/platformer">platformer</a></li>
+		</ul>
+	</div>
+	<div class="container_item">
+		<h2 class="container_item_title">Вёрстка сайтов<i class="ion-plus"></i></h2>
+		<ul class="container_item_body">
+			<li><a href="/blackagency">BLACK AGENCY</a></li>
+			<li><a href="/shopno">SHOPNO</a></li>
+			<li><a href="/startup">STARTUP</a></li>
+			<li><a href="/bootsup">BOOTSUP</a></li>
+			<li><a href="/crypto">CRYPTO</a></li>
+			<li><a href="/altay">ALTAY</a></li>
+			
+		</ul>
+	</div>
+	<div class="container_item">
+		<h2 class="container_item_title">Node.js <i class="ion-plus"></i></h2>
+		<ul class="container_item_body">
+			<li><a href="https://chattestnodejs.herokuapp.com/">Chat&Paint</a> </li>
+			<li><a href="https://skillssharing.herokuapp.com/">skillssharing</a></li>
+			
+		</ul>
+	</div>
+	<div class="container_item">
+		<h2 class="container_item_title">Vue.js <i class="ion-plus"></i></h2>
+		<ul class="container_item_body">
+			<li><a href="https://singlepageaplication.firebaseapp.com/">FilmFreeway</a></li>
+			<li><a href="/exel">exel</a></li>
+			<li><a href="/todolist">todolist</a></li>
+			<li><a href="/galery">galery</a></li>
+		</ul>
+	</div>
+	<div class="container_item">
+		<h2 class="container_item_title">JavaScript <i class="ion-plus"></i></h2>
+		<ul class="container_item_body">
+			<li><a href="/paint">paint</a></li>
+			
+		</ul>
+	</div>
+</div>
+
+
+<div class="text">Контакты<i class="ion-android-contacts"></i></div>
+<div class="contacts">
+	<div class="sidebar">
+		<ul>
+			<li>Телефон : +380991701893</li>
+			<li>E-mail : vanjadanuliv@gmail.com</li>
+			<li>vk: https://vk.com/id190775421</li>
+		
+		</ul>
+		<i class="ion-android-close"></i>
+	</div>
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+	 
+	$('.container_item_title').click(function(e){
+		if($(this).parent().children('.container_item_body').css('display')!='block'){
+			$('.container_item_body').slideUp();
+			$('.ion-plus').removeClass('transform');
+			$(this).parent().children('.container_item_body').slideToggle();
+		    $(this).parent().find('.ion-plus').toggleClass('transform');
+		  
+		}else{
+
+			$(this).parent().children('.container_item_body').slideToggle();
+		    $(this).parent().find('.ion-plus').toggleClass('transform');
+		}
+	
+    });
+    $('.ion-android-close').click(function(e){
+    	$('.sidebar').css('left','400px');
+    	setTimeout(function(){
+    		$('.contacts').css('display','none');
+    	},300);
+    	
+    	
+    });
+    $('.text').click(function(){
+    	$('.sidebar').css('left','400px');
+    	$('.contacts').css('display','flex');
+    	
+    	setTimeout(function(){
+    		
+    	    $('.sidebar').css('left','0px');
+    	},50);
+    	
+    });
+
+    
+    
+    
+</script>
+
+</body>
+</html>

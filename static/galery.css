@@ -1,0 +1,112 @@
+*{
+			padding:0;
+			margin:0;
+		}
+		body{
+			height:100vh;
+			background:#ececec;
+			width:100%;
+		}
+		#app{
+			display:flex;
+			width:100%;
+			background:#ececec;
+			flex-direction:column;
+			
+			
+		}
+		.photos{
+			margin-top:80px;
+			background:#ececec;
+			display:flex;
+			width:100%;
+			flex-wrap:wrap;
+			justify-content: space-around;
+		}
+		.photoImg{
+			width:400px;
+			height:250px;
+			border-radius:4px;
+			margin-bottom:0;
+		}
+		.ava{
+
+			width:50px;
+			height:50px;
+			border-radius:50%;
+			margin-right:30px;
+			margin-left:20px;
+		}
+		.author{
+			align-items: center;
+			display:flex;
+			
+			font-size:17px;
+			font-family:Arial;
+			background:white;
+			padding:10px 0;
+		}
+		.photo{
+			margin-bottom:40px;
+			box-shadow: 0 4px 4px 0px #ccc;
+			border-radius:4px;
+			display:flex;
+			flex-direction:column;
+		}
+		.pagination{
+			width:100%;
+			box-sizing:border-box;
+			display:flex;
+			justify-content: space-between;
+			padding:10px 60px;
+			align-items: center;
+			
+
+			
+		}
+		.left , .right{
+			width:85px;
+			height:30px;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+			font-size:17px;
+			font-family:Arial;
+			border:1px solid silver;
+			border-radius:3px;
+			color:black;
+			cursor:pointer;
+		}
+		.left:hover , .right:hover{
+			border-color:red;
+			color:red;
+		}
+		.pages{
+			font-size:17px;
+			font-family:Arial;
+			color:silver;
+			align-items: center;
+			flex:1;
+			text-align:center;
+		}
+		.pages ul{
+			display:flex;
+			width:100%;
+			text-align:center;
+			justify-content: center;
+			list-style: none;
+		}
+		.pages ul li{
+			font-size:16px;
+			font-family:Arial;
+			color:black;
+			padding:6px 9px;
+			border:1px solid #ccc;
+			border-radius:3px;
+			margin:0 5px;
+			cursor:pointer;
+		}
+		.pages ul li:hover, .pages li.active{
+			color:red;
+			border-color:red;
+		}

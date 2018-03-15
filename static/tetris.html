@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>tetris</title>
+</head>
+<style type="text/css">
+canvas{
+	height:90vh;
+	margin:auto;
+}
+body{
+			margin:0;
+			height:100vh;
+			display:flex;
+		}
+</style>
+<body>
+
+
+
+<canvas id="canvas" width="240" height="400"></canvas>
+<script type="text/javascript">
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext("2d");
+	ctx.scale(20,20);
+	ctx.fillStyle="black";
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	
+var arena = createMatrix(12,20);
+
+function drawMatrix(matrix,offset){
+	matrix.forEach(function(row,y){
+	row.forEach(function(value,x){
+		if(value!=0){
+			ctx.fillStyle=colors[value];
+			ctx.fillRect(x+offset.x,offset.y+y,1,1);
+		}
+	});
+});
+}
+
+
+var lastTime=0;
+var dropCounter=0;
+var dropInterval=1000;
+
+
+
+function update(time=0){
+	var deltaTime  = time - lastTime;
+	lastTime=time;
+
+	dropCounter+=deltaTime;
+	if(dropCounter>dropInterval){
+		playerDrop();
+	}
+
+	draw();
+	requestAnimationFrame(update);
+}
+
+
+var player={
+	pos:{x:5,y:0},
+	matrix:createPiece('T'),
+};
+
+
+function draw(){
+	ctx.fillStyle="black";
+	ctx.fillRect(0,0,canvas.width,canvas.height);
+	drawMatrix(arena,{x:0,y:0});
+	drawMatrix(player.matrix,player.pos);
+}
+document.addEventListener('keydown',function(event){
+	if(event.keyCode==37){
+		playerMove(-1);
+	}
+
+	if(event.keyCode==39){
+		playerMove(1);
+	}
+
+	if(event.keyCode==40){
+		playerDrop();
+	}
+	if(event.keyCode==81){
+		playerRotate(-1);
+	}
+	if(event.keyCode==87){
+		playerRotate(1);
+	}
+});
+
+function createMatrix(w,h){
+	var matrix = [];
+	while(h--){
+		matrix.push(new Array(w).fill(0));
+	}
+	return matrix;
+}
+
+function playerMove(dir){
+	player.pos.x+=dir;
+	if(collide(arena,player)){
+		player.pos.x-=dir;
+	}
+}
+
+function playerDrop(){
+	player.pos.y++;
+	if(collide(arena,player)){
+		
+		player.pos.y--;
+
+		merge(arena,player);
+		playerReset();
+		arenaSweep();
+		
+	}
+	dropCounter=0;
+}
+
+function collide(arena,player){
+	var [m,o]=[player.matrix,player.pos];
+	for(var y  =0;y<m.length;y++){
+		for(var x = 0;x<m[y].length;x++){
+			if(m[y][x]!=0 &&
+			   ( arena[y + o.y] &&
+			   arena[y + o.y][x+o.x])!=0
+				){
+
+				
+				return true;
+			}
+		}
+	}
+	return false;
+}
+function merge(arena,player){
+	player.matrix.forEach(function(row,y){
+		row.forEach(function(value,x){
+			if(value!=0){
+				arena[y+player.pos.y][x+player.pos.x]=value;
+			}
+		});
+	});
+}
+
+function rotate(matrix,dir){
+	for(var y = 0;y<matrix.length;y++){
+		for(var x=y;x<matrix[y].length;x++){
+			var temp = matrix[x][y];
+			matrix[x][y]=matrix[y][x];
+			matrix[y][x]=temp;
+
+		}
+	}
+	if(dir>0){
+		matrix.forEach(function(row,i){
+	     row.reverse();
+    });
+
+	}else{
+		matrix.reverse();
+	}
+	
+	
+}
+
+ function playerRotate(dir){
+ 	var pos = player.pos.x;
+ 	var offset  =1;
+ 	rotate(player.matrix,dir);
+ 	while(collide(arena,player)){
+ 		player.pos.x+=offset;
+ 		offset= -(offset+(offset>0?1:-1));
+ 		
+ 		if(offset>player.matrix[0].length){
+ 			rotate(player.matrix,-dir);
+ 			player.pos.x=pos;
+ 			
+ 			return;
+
+ 		}
+ 	}
+
+
+
+
+
+ 	// if(collide(arena,player)){
+ 	// 	if(player.pos.x+player.matrix[0].length > arena[0].length){
+ 	// 		player.pos.x--;
+ 	// 		return ;
+ 	// 	}
+ 	// }
+ 	// if(collide(arena,player)){
+ 	// 	player.pos.x++;
+ 	// }
+
+ } 
+function createPiece(type){
+	if(type=='T')
+	{
+		return [
+	[0,0,0],
+	[1,1,1],
+	[0,1,0]
+];
+	}else if(type=='O'){
+		return [
+	[2,2],
+	[2,2],
+	
+];
+	}else if(type=='L'){
+		return [
+	[0,3,0],
+	[0,3,0],
+	[0,3,3]
+];
+	}else if(type=='J'){
+		return [
+	[0,4,0],
+	[0,4,0],
+	[4,4,0]
+];
+	}else if(type=='I'){
+		return [
+	[0,5,0,0],
+	[0,5,0,0],
+	[0,5,0,0],
+	[0,5,0,0],
+];
+	}else if(type=='S'){
+		return [
+	[0,6,6],
+	[6,6,0],
+	[0,0,0]
+];
+	}
+	else if(type=='Z'){
+		return [
+	[7,7,0],
+	[0,7,7],
+	[0,0,0]
+];
+	}
+}
+var colors = [
+null, 
+'red',
+'blue',
+'violet',
+'green',
+'purple',
+'orange',
+'pink'
+];
+
+function playerReset(){
+	var pieces = "ILJOTSZ";
+	player.matrix=createPiece(pieces[Math.floor(pieces.length* Math.random()) ]);
+	player.pos.y=0;
+	player.pos.x=(Math.floor(arena[0].length/2 ))   - (Math.floor(player.matrix[0].length/2 ));
+	if(collide(arena,player)){
+		arena.forEach(function(e){
+			e.fill(0);
+		});
+	}
+}
+
+function arenaSweep(){
+	outer:for(var y = arena.length-1;y>0;y--){
+		for(var x= 0;x<arena[y].length;x++){
+			if(arena[y][x]==0){
+				continue outer;
+			}
+		}
+		var row = arena.splice(y,1)[0].fill(0);
+		arena.unshift(row);
+		y++;
+	}
+}
+
+
+
+
+update();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//РУХ ПО КОЛУ
+	// var	cat	=	document.querySelector(".point");		
+	// var	angle	=	0;		
+	// function	animate(time){				
+		
+	// 	cat.style.top	=	(Math.sin(angle)	* 90)+85	+	"px";				
+	// 	cat.style.left	=	(Math.cos(angle)  * 90)+85 +	"px";		
+	// 	angle+=Math.PI/180*1;		
+	// 	requestAnimationFrame(animate);		
+	// }		
+	// 	requestAnimationFrame(animate); 
+
+</script>
+</body>
+</html>

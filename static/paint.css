@@ -1,0 +1,56 @@
+body{
+	font-family:Arial;
+	font-size:17px;
+}
+a{
+	text-decoration:none;
+}
+.toolbar span{
+	margin-right:20px;
+}
+.toolbar>div{
+	margin-bottom:20px;
+}
+select{
+	width:100px;
+	height:30px;
+	font-family:Arial;
+	font-size:17px;
+	outline: 0;
+	margin:20px 0;
+}
+input[type="file"]{
+	font-family:Arial;
+	font-size:17px;
+	border:0;
+
+}
+.save{
+	background:#3f51b5;
+	color:white;
+	font-family:Arial;
+	font-size:17px;
+	padding:6px 19px;
+	border-radius:4px;
+}
+button[type="submit"]{
+	font-family:Arial;
+	font-size:17px;
+	border:0;
+	outline: 0;
+	background:#9e9e9e;
+	padding:6px 19px;
+	border-radius:4px;
+	margin-left:10px;
+	
+
+}
+input[type="text"]{
+	font-family:Arial;
+	font-size:17px;
+	height:27px;
+	border:1px solid #aeaeae;
+	outline: 0;
+
+	border-radius:4px;
+}
